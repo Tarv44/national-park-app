@@ -61,7 +61,8 @@ function getResults(states, maxCount) {
             }
             $('.js-error-msg').text(`Error: ${response.statusText}`)
             $('.js-error-msg').removeClass('hidden')
-            throw new Error(response.statusText);})    
+            throw new Error(response.statusText)
+        })    
         .then(responseJSON => displayResults(responseJSON))
         .catch(err => {
             console.log(err);
