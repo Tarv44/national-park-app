@@ -21,20 +21,26 @@ function formatAddress(address) {
 
 function displayResults(responseJSON) {
     console.log('displayResults ran.');
-    $('.js-results').empty()
-    for (let i = 0; i < responseJSON.data.length; i++) {
-        const park = responseJSON.data[i];
-        const address = formatAddress(park.addresses[0]);
-        $('.js-results').append(
-            `<li>
-                <h3>${park.fullName}</h3>
-                <ul>
-                    <li><a href='${park.url}'>${park.url}</a></li>
-                    <li>${address}</li>
-                    <li>${park.description}</li>
-                </ul>
-            </li>`
-        )
+    $('.js-error-msg').empty();
+    $('.js-results').empty();
+    if(responseJSON.data.length === 0) {
+        $('.js-error-msg').text(`No matching results exist.`)
+        $('.js-error-msg').removeClass('hidden')
+    } else {
+        for (let i = 0; i < responseJSON.data.length; i++) {
+            const park = responseJSON.data[i];
+            const address = formatAddress(park.addresses[0]);
+            $('.js-results').append(
+                `<li>
+                    <h3>${park.fullName}</h3>
+                    <ul>
+                        <li><a href='${park.url}'>${park.url}</a></li>
+                        <li>${address}</li>
+                        <li>${park.description}</li>
+                    </ul>
+              </li>`
+            )
+        }
     }
     $('.js-results').removeClass('hidden');
 }
